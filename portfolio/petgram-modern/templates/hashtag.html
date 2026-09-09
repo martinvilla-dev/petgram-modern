@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+    <title>Document</title>
+</head>
+<body>
+{% include 'nav.html' %}
+<h1 class="explore-page-header">{{hashtag}}</h1>
+<div class="container profile-container-class">
+    <div class="row profile-content">
+        {% for item in post %}
+            {% if item.post_file.url|slice:"-4:"  == '.mp4' or item.post_file.url|slice:"-4:"  == '.mov' %}
+                <div class="col-sm photo-column">
+                    <a href="/post_detail/{{item.id}}">
+                        <video
+                            id="my-video"
+                            class="video-js profile-post-content"
+                            controls
+                            preload="auto"
+                            width="640"
+                            height="264"
+                            preload="metadata"
+                            data-setup="{}">
+                            <source src="{{item.post_file.url}}#t=0.1" type="video/mp4" />
+                        </video>
+                    </a>
+                </div>
+            {% else %}
+                <div class="col-sm">
+                    <a href="/post_detail/{{item.id}}"><img class="profile-post-content" src="{{ item.post_file.url }}" alt="" /></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+</body>
+</html>

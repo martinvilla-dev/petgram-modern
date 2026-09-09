@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto&family=Rock+Salt&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container">
+<div class="card profile-card" style="width: 100%;">
+      <div class="card-header upload-head text-center">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        Edit Profile
+      </div>
+    <form method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn profile-edit btn-md" type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Submit</button>
+        <a href="/profile/{{user.id}}/"><button class="btn edit-profile btn-md"> <i class="fa fa-window-close" aria-hidden="true"></i> Cancel</button></a>
+        {% comment %} <a href="/deactivate/{{user.id}}/">Deactivate</a> {% endcomment %}
+        <span><button type="button" class="btn deactivate btn-md" data-toggle="modal" data-target="#myModal">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+          Deactivate Account
+        </button></span>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title text-center delete-header">Are you Sure you want to delete your account?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <a href="/deactivate/{{user.id}}/">Deactivate Account</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>   
+    </form>
+    </div>
+    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+
+</div>
+</body>
+</html>
+
+

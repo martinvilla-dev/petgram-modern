@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+      /* .choice{
+        width: 20rem; position: relative; left: 1.1875rem
+      } */
+      #auth-submit-btn{
+        background-color: #F58220;
+        color: white;
+      }
+      /* .alert{
+        width: 20rem; position: relative; left: 1.1875rem;
+      } */
+      h1{
+        font-family: 'Gochi Hand', cursive;
+      }
+      body{
+        font-family: 'Roboto', sans-serif;
+      }
+      .authentication-input{
+        width: 20rem;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    {% include 'nav.html' %}
+    <!-- <h1>{{ headerone }}</h1>
+    <h1>{{ headertwo }}</h1> -->
+    <div class="mx-auto" style="width: 200px;">
+      <div class="container">
+        <div class="card" style="width: 25rem; position: relative; right: 7rem; margin-top: 10px;">
+          <div class="card-body" style="text-align: center;">
+            <img class="login-petgram-logo mx-auto" src="{% static 'images/PETGRAM-LOGO.png'%}" alt="Petgram logo">
+            <form action="" method="POST">
+              <div class="form-group">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                <div class="form-group">
+                  <!-- <label for="{{ field.id_for_label }}">{{ field.label }}</label> -->
+                  {% if field.field.widget.input_type == "select" %}
+                    {{ field }}
+                  {% else %}
+                    <input 
+                      type="{{ field.field.widget.input_type }}" 
+                      name="{{ field.name }}" 
+                      id="{{ field.id_for_label }}" 
+                      placeholder="{{ field.label }}"
+                      class="form-control authentication-input"
+                      >
+                  {% endif %}
+                </div>
+                {% endfor %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+              {% if headertwo %}
+                <input type="submit" value="Sign Up" class="btn btn-sm btn-block" id="auth-submit-btn"/>
+                <!-- <button type="submit" class="btn btn-primary btn-sm btn-block auth-submit-btn">Sign Up</button> -->
+              {% elif headerone %}
+                <!-- <input type="auth-submit-btn" value="Login" class="btn btn-primary btn-sm btn-block" id="auth-submit-btn"/> -->
+                <input type="submit" value="Login" class="btn btn-sm btn-block" id="auth-submit-btn">
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto" style="width: 200px;">
+      <div class="container">
+        <div class="card" style="width: 25rem; position: relative; right: 7rem; top: .8rem">
+          <div class="card-body" style="text-align: center; align-items: center;">
+            {% if headertwo %}
+              Already have an account? <a style="color:#F58220" href="/login">Login</a>
+            {% elif headerone %}
+              Don't have an account? <a style="color:#F58220" href="/signup">Sign Up</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

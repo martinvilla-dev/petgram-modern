@@ -1,0 +1,431 @@
+/* 404 page styling image */
+/* h1 {
+    color: aqua;
+} */
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #FAF9F6;
+}
+/* Navbar css */
+nav.navbar {
+    border-bottom: 2px solid #f4f4f4;
+}
+.nav-accent {
+    background-color: #0066b3;
+    height: 50px;
+}
+.navbar.navbar-expand-lg.navbar-light.body-nav {
+    background-color: #fff;
+}
+.header-text {
+    font-family: 'Gochi Hand', cursive;
+    line-height: 50px;
+}
+.btn-nav {
+    border: 2px solid #f58220;
+    color: #f58220;
+    background-color: #fff;
+    cursor: pointer;
+}
+.btn-nav:hover {
+    background-color: #f58220;
+    color: #fff;
+}
+.form-control:focus {
+  border-color: #f58220;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(245, 130, 32, .075),0 0 8px rgb(245, 130, 32);
+  box-shadow: inset 0 1px 1px rgba(245, 130, 32,.075),0 0 8px rgb(245, 130, 32);
+}
+.navbar-nav a.nav-item.nav-link:hover {
+    color: #f58220;
+}
+.navbar-nav a.nav-item.nav-link {
+    font-family: 'Roboto', sans-serif;
+}
+.body-nav {
+    margin-bottom: 25px;
+}
+
+.petgram-logo{
+    border-radius: 50%; 
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f58220;
+}
+
+/* Homepage */
+.avatar {
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    float:left;
+    border: 2px solid #f58220;
+}
+.post-header {
+    /* float: right; */
+    margin-left: 20px;
+    line-height: 80px;
+    font-size: 20px;
+}
+.post-header > a {
+    color: #000;
+    text-decoration: none;
+}
+.post-header > a:hover {
+    color: #f58220;
+    text-decoration: none;
+}
+img.card-img-top {
+    width: 100%;
+}
+.card.post {
+    margin-bottom: 50px;
+    font-family: 'Gochi Hand', cursive;
+    font-size: 20px;
+}
+.grid-container {
+    border: 1px solid #ccc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.card-header.list {
+    background-color: #f58220;
+    color: #fff;
+}
+.card.side {
+    font-family: 'Roboto', sans-serif;
+}
+ul.list-group.list-group-flush {
+    color: #0066b3;
+}
+li.list-group-item > a {
+    color: #000;
+    text-decoration: none;
+}
+li.list-group-item > span > a {
+    color: rgb(133, 133, 133);
+    text-decoration: none;
+}
+li.list-group-item > span > a:hover {
+    color: #f58220;
+    text-decoration: none;
+}
+li.list-group-item > a:hover {
+    color: #f58220;
+    text-decoration: none;
+}
+.ellipsis {
+    float: right;
+    line-height: 85px;
+    margin-right: 10px;
+    color: rgb(133, 133, 133);
+    font-family: 'Roboto', sans-serif;
+}
+.ellipsis > a {
+    color: #0066b3;
+}
+.ellipsis > a:hover {
+    color: #f58220;
+}
+.card-title.bubble > a {
+    color: #0066b3;
+}
+/* post details */
+ .chat {
+    border: 1px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+ }
+ img.avatar-comments {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 2px solid #0066b3;
+ }
+.btn.btn-comment {
+    border: 2px solid #f58220;
+    color: #f58220;
+    background-color: #fff;
+    cursor: pointer;
+}
+.btn.btn-comment:hover {
+    background-color: #f58220;
+    color: #fff;
+}
+/* edit profile */
+.btn.profile-edit {
+    border: 2px solid #f58220;
+    color: #f58220;
+    background-color: #fff;
+    cursor: pointer;
+    width: 33%;
+    margin-left: 3px;
+}
+.btn.profile-edit:hover {
+    background-color: #f58220;
+    color: #fff;
+}
+.btn.edit-profile {
+    border: 2px solid #0066b3;
+    color: #0066b3;
+    background-color: #fff;
+    cursor: pointer;
+    width: 33%;
+}
+.btn.edit-profile:hover {
+    background-color: #0066b3;
+    color: #fff;
+}
+.btn.deactivate {
+    border: 2px solid #d10303;
+    color: #d10303;
+    background-color: #fff;
+    cursor: pointer;
+    width: 33%;
+    float: right;
+}
+.btn.deactivate:hover {
+    background-color: #d10303;
+    color: #fff;
+}
+img.card-img-top {
+    max-height: 500px;
+    object-fit: cover;
+}
+h4.delete-header{
+    font-family: 'Gochi Hand', cursive;
+}
+.profile-card {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 30px;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px rgba(94,104,121,.288);
+    border-radius: 5px;
+}
+/* Notification page */
+.card-header.notify-head, .card-header.upload-head {
+    font-family: 'Gochi Hand', cursive;
+    font-size: 20px;
+    background-color: #f58220;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.notify-img {
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    float:left; 
+}
+.notify-time {
+    line-height: 80px;
+    font-family: 'Roboto', sans-serif;
+}
+ul.notify-link > a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #0066b3;
+}
+ul.notify-link > a:hover {
+    color: #f58220;
+}
+.post-card {
+    font-family: 'Roboto', sans-serif;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px rgba(94,104,121,.288);
+    border-radius: 5px;
+}
+/* the profile and post forms */
+.form-control.post-form {
+    box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px rgba(94,104,121,.288);
+    border-radius: 5px;
+}
+.form-control.post-form:focus {
+    border-color: #f58220;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(245, 130, 32, .075),0 0 8px rgb(245, 130, 32);
+    box-shadow: inset 0 1px 1px rgba(245, 130, 32,.075),0 0 8px rgb(245, 130, 32);
+    font-family: 'Roboto', sans-serif;;
+}
+.container{
+    padding: 0px;
+     /*background-color: cadetblue;*/
+} 
+.profile-page-pic{
+    height: 200px;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: 2.5px; 
+    border-radius: 50%; 
+    width: 200px; 
+    border: 5px solid #F58220;
+    object-fit: cover;
+}
+.prophet{
+    float: left; 
+    border-radius: 50%; 
+    margin-top: 40px;
+    margin-left: 40px;
+    width: 210px;
+    height: 210px;
+    border: 3px solid #0066b3;
+}
+.user-info{
+    position: relative;
+    top: 40px;
+    padding-left: 295px;
+    height: 260px;
+    border-bottom: 1px solid rgb(207, 207, 207)
+}
+.username-title{
+    display: inline
+}
+.follow-unfollow{
+    display: inline;
+    position: relative;
+    left: 40px;
+    bottom: 8px
+}
+.profile-content{
+    margin-top: 40px;
+}
+.user-data-count{
+    margin-top: 1rem;
+}
+.profile-count{
+    display: inline;
+    padding-left: 40px;
+}
+.post-count{
+    display:inline;
+}
+.display-name{
+    font-weight: bold;
+}
+.profile-post-content{
+    object-fit: cover;
+    width: 300px; 
+    height: 300px; 
+    margin-top: 30px;
+    margin-left: 25px;
+}
+.profile-post-content:hover{
+    box-shadow: 0 5px 15px #0066b3
+}
+.fa-cog{
+    color: #F58220;
+    font-size: 30px;
+}
+.fa-cog:hover{
+    color: #0066b3
+}
+#user-website{
+    color: #F58220;
+}
+#user-website:hover{
+    color: #0066b3;
+}
+.col-sm{
+    flex-grow: 0;
+}
+.follow-btn{
+    background-color: #F58220;
+}
+.follow-btn:hover{
+    background-color: #0066b3;
+}
+#follower-list{
+    color: black
+}
+.follower-list:hover{
+    color: black
+}
+.feed-post-large{
+    object-fit: cover;
+    width: 630px; 
+    height: 630px; 
+    margin-top: 30px;
+}
+.feed-post-content{
+    margin-top: 40px;
+    display: flex;
+    flex-flow: column-wrap;
+}
+/* Search page */
+.card-header.search-head {
+    font-family: 'Gochi Hand', cursive;
+    font-size: 20px;
+    background-color: #f58220;
+    color: #fff;
+    margin-bottom: 15px;
+}
+.search-img {
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    float:left;
+}
+.search-link > a{
+    margin-left: 10px;
+    text-decoration: none;
+    color: #0066b3;
+}
+.search-link > a:hover {
+   color: #f58220;
+}
+.search-info {
+    line-height: 80px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-petgram-logo {
+    /* float: left;  */
+    border-radius: 50%; 
+    margin-left: 40px;
+    margin-bottom: 20px;
+    width: 210px;
+    height: 210px;
+    border: 3px solid #f58220;
+
+}
+/* followers and following list */
+img.following-avatar{
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.following-user{
+    line-height: 80px;
+}
+
+.btn.btn-following {
+    border: 2px solid #f58220;
+    color: #f58220;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.btn.btn-following:hover {
+    background-color: #f58220;
+    color: #fff;
+}
+.following-title {
+    font-family: 'Gochi Hand', cursive;
+}
+.explore-page-header{
+    text-align: center;
+    margin: auto;
+    color: #F58220;
+    font-family: 'Gochi Hand', cursive;
+}

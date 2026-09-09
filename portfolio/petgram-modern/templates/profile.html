@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+    <title>Profile Page</title>
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="mx-auto">
+    <div class='container profile-container-class'>
+        {% if user.profile_pic %}
+            <div class="prophet">
+                <img class="profile-page-pic" src="{{user.profile_pic.url}}" alt="Profile Picture">
+            </div>
+        {% else %}
+            <div class="prophet">
+                <img class="profile-page-pic" src="{% static 'images/placeholder.png'%}" alt="Profile Picture">
+            </div>
+        {% endif %}
+        <div class="user-info">
+            <div>
+                <h1 class="username-title">{{ user.username }}</h1>
+                {% if request.user != user %}
+                    {% if user.is_authenticated %}
+                        {% if user in request.user.follows.all  %}
+                            <a class="follow-unfollow" href="{% url 'unfollow' user.id %}"><button type="button" class="btn btn-secondary follow-btn">unfollow</button></a>
+                        {% else %}
+                            <a class="follow-unfollow" href="/follow/{{user.id}}/"><button type="button" class="btn btn-secondary follow-btn">follow</button></a>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <a href="/edit/{{user.id}}/"><i class="fas fa-cog"></i></a>
+                {% endif %}
+            </div>
+            <p class="user-data-count">
+                <div class="post-count"><strong>{{ cnt }}</strong> Post</div>
+                <div class="profile-count">
+                    <strong>{{ following_count }}</strong>
+                    <button type="button" class="btn btn-link" id="follower-list" data-toggle="modal" data-target="#exampleModal">
+                       Following 
+                    </button>
+                </div>
+                <div class="profile-count">
+                    <strong>{{ follower_count }}</strong>
+                    <button type="button" class="btn btn-link" id="follower-list" data-toggle="modal" data-target="#followerModal">
+                        Followers
+                    </button>
+                </div>
+            </p>
+            <div class="display-name">{{ user.display_name }}</div> 
+            <div>{{ user.bio }}</div>
+            <div>{{ user.pet_type }}</div>
+            <a id="user-website" href="{{ user.website }}">{{ user.website }}</a>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title following-title" id="exampleModalLabel">Following</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    {%for users in follow_list%}
+                    <div class="following-list-container">
+                            {% if users.profile_pic %}
+                            <span><img class="following-avatar" src="{{users.profile_pic.url}}" alt="Avatar" style="width:100%;"></span>
+                            {% else %}
+                            <span><img class="following-avatar" src="{% static 'images/placeholder.png'%}" alt="Avatar" style="width:100%;"></span>
+                            {% endif %}
+                            <span class="following-user"><a href="/profile/{{users.id}}">{{ users.username }}</a></span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-following" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal fade" id="followerModal" tabindex="-1" role="dialog" aria-labelledby="followerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title following-title" id="followerModalLabel">Followers</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    {%for users in follower_list%}
+                        <div class="following-list-container">
+                            {% if users.profile_pic %}
+                            <span><img class="following-avatar" src="{{users.profile_pic.url}}" alt="Avatar" style="width:100%;"></span>
+                            {% else %}
+                            <span><img class="following-avatar" src="{% static 'images/placeholder.png'%}" alt="Avatar" style="width:100%;"></span>
+                            {% endif %}
+                            <span class="following-user"><a href="/profile/{{users.id}}">{{ users.username }}</a></span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-following" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row profile-content">
+            {% for item in post %}
+                {% if item.post_file.url|slice:"-4:"  == '.mp4' or item.post_file.url|slice:"-4:"  == '.mov' %}
+                    <div class="col-sm photo-column">
+                        <a href="/post_detail/{{item.id}}">
+                            <video
+                                id="my-video"
+                                class="video-js profile-post-content"
+                                controls
+                                preload="auto"
+                                width="640"
+                                height="264"
+                                preload="metadata"
+                                data-setup="{}">
+                                <source src="{{item.post_file.url}}#t=0.1" type="video/mp4" />
+                            </video>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="col-sm">
+                        <a href="/post_detail/{{item.id}}"><img class="profile-post-content" src="{{ item.post_file.url }}" alt="" /></a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% comment %} </div> {% endcomment %}
+<script>
+    var video = Popcorn( "#my-video" );
+    video.listen( "canplayall", function() {
+        this.currentTime( 10 ).capture();
+    });
+    $('#exampleModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+    $('#followerModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
+</script>
+<script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

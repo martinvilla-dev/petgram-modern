@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto&family=Rock+Salt&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+{% include 'nav.html' %}
+    <div class="container">
+    <div class="card" style="width: 100%;">
+        <div class="card-header notify-head text-center">
+            <i class="fa fa-bell-o" aria-hidden="true"></i>
+            Notifications
+        </div>
+
+        {% for item in notifications %}
+        <ul class="notify-link">
+        {% if item.text.post_file.url|slice:"-4:"  == '.mp4' or item.text.post_file.url|slice:"-4:"  == '.mov' %}
+            <video
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+                width="640"
+                height="264"
+                poster=""
+                data-setup="{}"
+            >
+                <source src="{{item.text.post_file.url}}" type="video/mp4" />
+            </video>
+        {% else %}
+            <img class="notify-img" src="{{ item.text.post_file.url }}" alt="" />
+        {% endif %}
+        <a href="/post_detail/{{item.text.id}}">{{item}}</a>
+        <span class="notify-time">{{item.text.created_at}}</span>
+        </ul>
+        {% endfor %}
+        
+        {% for c in comment_notify %}
+        <ul class="notify-link">
+        {% if c.text.post.post_file.url|slice:"-4:"  == '.mp4' or c.text.post.post_file.url|slice:"-4:"  == '.mov' %}
+            <video
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+                width="640"
+                height="264"
+                poster=""
+                data-setup="{}"
+            >
+                <source src="{{c.text.post.post_file.url}}" type="video/mp4" />
+            </video>
+        {% else %}
+            <img class="notify-img" src="{{ c.text.post.post_file.url }}" alt="" />
+        {% endif %}
+        <a href="/post_detail/{{c.text.post.id}}">{{c}}</a>
+        <span class="notify-time">{{c.text.created_at}}</span>
+        </ul>
+        {% endfor %}
+     
+    </div>
+    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+</div>
+</body>
+</html>

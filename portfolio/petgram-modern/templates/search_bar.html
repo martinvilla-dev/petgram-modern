@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto&family=Rock+Salt&display=swap" rel="stylesheet">
+    
+    <title>Document</title>
+</head>
+<body>
+{% include 'nav.html' %}
+{% if search %}
+    <div class="container">
+    <div class="card" style="width: 100%;">
+      <div class="card-header search-head text-center">
+        <h4><i class="fa fa-search" aria-hidden="true"></i> Results For {{ search }} </h4>
+      </div>
+    <ul class="search-link">
+    {% for u in users %}
+    {% if u.profile_pic %}
+    <img class="search-img" src="{{u.profile_pic.url}}" alt="profile_pic">
+    {% else %}
+    <img class="search-img" src="{% static 'images/placeholder.png'%}" alt="Profile Picture">
+    {% endif %}
+    <a class="search-info" href="/profile/{{u.id}}">{{u.username}}</a> - {{u.bio}} <br>
+    {% endfor %}
+{% else %}
+    <div class="container">
+    <div class="card" style="width: 100%;">
+      <div class="card-header search-head text-center">
+        <h4><i class="fa fa-search" aria-hidden="true"></i> Opps no search was entered </h4>
+      </div>
+    </div>
+    </div>
+{% endif %}
+</ul>
+</div>
+<script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+</div>
+</body>
+</html>
