@@ -23,87 +23,90 @@
   <body>
     {% include 'nav.html' %}
     <div class="container">
-    <div class="first-col" style="float:left; width: 60%;">
-      {% for post in feed %}
-        <div class="card post" style="width: 109%;">
-          <div class="card-header">
-            {% if post.display_name.profile_pic %}
-              <img class="avatar" src="{{post.display_name.profile_pic.url}}" alt="avatar" />
-            {% else %}
-              <img class="avatar" src="{% static 'images/placeholder.png'%}" alt="Profile Picture"/>
-            {% endif %}
-            <span class="post-header"><a href="/profile/{{post.display_name.id}}">{{post.display_name}}</a></span>
-            {% if post.display_name.username  == request.user.username %}
-            <div class="dropdown ellipsis">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="iconify" data-icon="fa-ellipsis-h" data-inline="false"></span>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <a href="/edit_post/{{post.id}}"><button class="dropdown-item" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-                  <a href="/delete/{{post.id}}/"><button class="dropdown-item" type="button"><i class="fa fa-times text-danger" aria-hidden="true"></i> Delete</button></a>
-              </div>
-             </div>
-            {% endif %}
-          </div>
-        
-
-        {% if post.post_file.url|slice:"-4:" == '.mp4' or post.post_file.url|slice:"-4:" == '.mov' %}
-          <video
-            id="my-video"
-            class="video-js card-img-top"
-            controls
-            preload="auto"
-            width="640"
-            height="464"
-            preload="metadata"
-            data-setup="{}"
-          >
-            <source src="{{post.post_file.url}}#t=0.1" type="video/mp4" />
-          </video>
-        {% else %}
-          <img class="card-img-top" src="{{ post.post_file.url }}" alt="" />
-        {% endif %}
-
-        <div class="card-body">
-            {% if request.user in post.user_likes.all %}
-            <span><a href="/unlike/{{post.id}}/"><i class="fa fa-heart fa-2x text-danger" aria-hidden="true"></i></a>Likes {{post.likes}}</span>
-            {% else %}
-            <span><a href="/like/{{post.id}}/"><i class="fa fa-heart fa-2x text-secondary" aria-hidden="true"></i></a>Likes {{post.likes}}</span>
-            {% endif %}
-          <span class="card-title bubble"><a href="/post_detail/{{post.id}}"><i class="fa fa-comment-o fa-2x"></i></a>Comment</span>
+      <div class="first-col" style="float:left; width: 60%;">
+        {% for post in feed %}
+          <div class="card post" style="width: 109%;">
+            <div class="card-header">
+              {% if post.display_name.profile_pic %}
+                <img class="avatar" src="{{post.display_name.profile_pic.url}}" alt="avatar" />
+              {% else %}
+                <img class="avatar" src="{% static 'images/placeholder.png'%}" alt="Profile Picture"/>
+              {% endif %}
+              <span class="post-header"><a href="/profile/{{post.display_name.id}}">{{post.display_name}}</a></span>
+              {% if post.display_name.username == request.user.username %}
+              <div class="dropdown ellipsis">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="iconify" data-icon="fa-ellipsis-h" data-inline="false"></span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a href="/edit_post/{{post.id}}"><button class="dropdown-item" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                    <a href="/delete/{{post.id}}/"><button class="dropdown-item" type="button"><i class="fa fa-times text-danger" aria-hidden="true"></i> Delete</button></a>
+                </div>
+               </div>
+              {% endif %}
+            </div>
           
-        </div>
+            <!-- Display Location if available -->
+            {% if post.location %}
+              <div class="px-3 pt-2 text-muted" style="font-size: 14px; font-family: 'Roboto', sans-serif;">
+                <i class="fa fa-map-marker text-warning" aria-hidden="true"></i> {{ post.location }}
+              </div>
+            {% endif %}
 
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <a href="/profile/{{post.display_name.id}}">{{post.display_name}}</a> -
-            <span><a href="/post_detail/{{post.id}}">{{post.caption}}</a></span>
-            <p>{{post.created_at}}</p>
-          </li>
-        </ul>
-        </div>
-      {% endfor %}
-      </div>
-      <div class="second-col" style="float:right; width: 30%;">
-      <div class="card side" style="width: 18rem;">
-      <div class="card-header list text-center">
-        Most Recent Post By:
-        {% comment %} {{feed}} {% endcomment %}
-      </div>
-        {% for person in most_recent %}
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{person.display_name}}</li>
-        </ul>
+            <!-- Media Check: Video vs Image with Filter -->
+            {% if post.post_file.url|slice:"-4:" == '.mp4' or post.post_file.url|slice:"-4:" == '.mov' %}
+              <video
+                id="my-video"
+                class="video-js card-img-top"
+                controls
+                preload="auto"
+                width="640"
+                height="464"
+                data-setup="{}"
+              >
+                <source src="{{post.post_file.url}}#t=0.1" type="video/mp4" />
+              </video>
+            {% else %}
+              <img
+                class="card-img-top filter-{{ post.filter_style|default:'normal' }}"
+                src="{{ post.post_file.url }}"
+                alt="Post image"
+              />
+            {% endif %}
+
+            <div class="card-body">
+              {% if request.user in post.user_likes.all %}
+              <span><a href="/unlike/{{post.id}}/"><i class="fa fa-heart fa-2x text-danger" aria-hidden="true"></i></a>Likes {{post.likes}}</span>
+              {% else %}
+              <span><a href="/like/{{post.id}}/"><i class="fa fa-heart fa-2x text-secondary" aria-hidden="true"></i></a>Likes {{post.likes}}</span>
+              {% endif %}
+              <span class="card-title bubble"><a href="/post_detail/{{post.id}}"><i class="fa fa-comment-o fa-2x"></i></a>Comment</span>
+            </div>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a href="/profile/{{post.display_name.id}}">{{post.display_name}}</a> -
+                <span><a href="/post_detail/{{post.id}}">{{post.caption}}</a></span>
+                <p>{{post.created_at}}</p>
+              </li>
+            </ul>
+          </div>
         {% endfor %}
       </div>
+
+      <div class="second-col" style="float:right; width: 30%;">
+        <div class="card side" style="width: 18rem;">
+          <div class="card-header list text-center">
+            Most Recent Post By:
+          </div>
+          {% for person in most_recent %}
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{person.display_name}}</li>
+          </ul>
+          {% endfor %}
+        </div>
       </div>
       <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
-      <script>
-        var video = Popcorn( "#my-video" );
-        video.listen( "canplayall", function() {
-          this.currentTime( 10 ).capture();
-        });
-      </script>
     </div>
   </body>
 </html>

@@ -429,3 +429,17 @@ img.following-avatar{
     color: #F58220;
     font-family: 'Gochi Hand', cursive;
 }
+
+/* --- NEW: Photo Filter Styles --- */
+.filter-normal {
+    filter: none;
+}
+.filter-grayscale {
+    filter: grayscale(100%);
+}
+.filter-sepia {
+    filter: sepia(100%);
+}
+.filter-vintage {
+    filter: sepia(50%) contrast(120%) brightness(90%) saturate(85%);
+}

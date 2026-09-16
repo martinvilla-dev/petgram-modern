@@ -113,10 +113,18 @@
               </div>
             </div>
         </div>
+
         <div class="row profile-content">
             {% for item in post %}
-                {% if item.post_file.url|slice:"-4:"  == '.mp4' or item.post_file.url|slice:"-4:"  == '.mov' %}
-                    <div class="col-sm photo-column">
+                <div class="col-sm mb-4">
+                    <!-- Display Location if available -->
+                    {% if item.location %}
+                        <div class="text-muted mb-1" style="font-size: 13px; font-family: 'Roboto', sans-serif;">
+                            <i class="fa fa-map-marker text-warning" aria-hidden="true"></i> {{ item.location }}
+                        </div>
+                    {% endif %}
+
+                    {% if item.post_file.url|slice:"-4:" == '.mp4' or item.post_file.url|slice:"-4:" == '.mov' %}
                         <a href="/post_detail/{{item.id}}">
                             <video
                                 id="my-video"
@@ -130,16 +138,16 @@
                                 <source src="{{item.post_file.url}}#t=0.1" type="video/mp4" />
                             </video>
                         </a>
-                    </div>
-                {% else %}
-                    <div class="col-sm">
-                        <a href="/post_detail/{{item.id}}"><img class="profile-post-content" src="{{ item.post_file.url }}" alt="" /></a>
-                    </div>
-                {% endif %}
+                    {% else %}
+                        <a href="/post_detail/{{item.id}}">
+                            <img class="profile-post-content filter-{{ item.filter_style|default:'normal' }}" src="{{ item.post_file.url }}" alt="Profile post image" />
+                        </a>
+                    {% endif %}
+                </div>
             {% endfor %}
         </div>
     </div>
-{% comment %} </div> {% endcomment %}
+</div>
 <script>
     var video = Popcorn( "#my-video" );
     video.listen( "canplayall", function() {
@@ -158,5 +166,3 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
