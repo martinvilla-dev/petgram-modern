@@ -53,8 +53,8 @@
               </div>
             {% endif %}
 
-            <!-- Media Check: Video vs Image with Filter -->
-            {% if post.post_file.url|slice:"-4:" == '.mp4' or post.post_file.url|slice:"-4:" == '.mov' %}
+            <!-- Media Check: Video vs Image using Model Property -->
+            {% if post.is_video %}
               <video
                 id="my-video"
                 class="video-js card-img-top"

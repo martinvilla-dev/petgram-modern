@@ -62,7 +62,7 @@ def unfollow_view(request, user_id):
     user = request.user
     to_unfollowed = CustomUser.objects.get(id=user_id)
     user.follows.remove(to_unfollowed)
-    to_follow.followers.remove(user)
+    to_unfollowed.followers.remove(user)
     user.save()
     print('unfollow')
     return HttpResponseRedirect(reverse('profile', kwargs={'user_id': to_unfollowed.id}))   

@@ -1,10 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 {% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets & Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -14,79 +23,115 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Roboto&family=Rock+Salt&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>Document</title>
+    <title>Petgram</title>
   </head>
   <body>
-    <div class="navbar-expand-lg nav-accent">
-    {% if not request.user.is_authenticated %}
-      <h4 class="header-text text-center text-white">Petgram where your pets can be friends!</h4>
-    {% else %}
-      <h4 class="header-text text-center text-white">Welcome {{request.user.display_name}} !</h4>
-    {% endif %}
+    <!-- Top Announcement / Welcome Bar -->
+    <div class="top-announcement-bar py-2">
+      {% if not request.user.is_authenticated %}
+      <p class="mb-0 text-center text-white small font-weight-medium">
+        Petgram — Where your pets can be friends!
+      </p>
+      {% else %}
+      <p class="mb-0 text-center text-white small font-weight-medium">
+        Welcome back,
+        {{request.user.display_name|default:request.user.username}}!
+      </p>
+      {% endif %}
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light body-nav">
-      <a class="navbar-brand" href="/"><img class="petgram-logo" src="{% static 'images/nav-logo.png'%}" alt="Petgram logo"></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse"></div>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="/"
-            ><i class="fa fa-home" aria-hidden="true"></i> Home<span class="sr-only">(current)</span></a
-          >
-          {% if request.user.is_authenticated %}
-          <a
-            class="nav-item nav-link"
-            href="/profile/{{request.user.id}}"
-            ><i class="fa fa-user" aria-hidden="true"></i> Profile<span class="sr-only">(current)</span></a
-          >
-          <a class="nav-item nav-link" href="/submit_post"><i class="fa fa-comments-o" aria-hidden="true"></i> Post</a>
-          <li class="nav-item">
-              <span class="badge badge-pill badge-warning" style="float:right;margin-bottom:-15px;margin-right:-8px;font-size:10px">{{total_notify}}</span>
-              <a class="nav-item nav-link" href="/notifications"
-                ><i class="fa fa-bell" aria-hidden="true"></i> Notification<span class="sr-only">(current)</span></a></a
-              >
-          </li>         
-          <a class="nav-item nav-link" href="/feed"><i class="fa fa-compass" aria-hidden="true"></i> Explore</a>
-          <a class="nav-item nav-link" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>
-          Logout</a>
-          {% endif %} {% if not request.user.is_authenticated %}
-          <a class="nav-item nav-link" href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
-          {% endif %}
-          <form
-            class="form-inline"
-            action="{% url 'search_bar' %}"
-            method="POST"
-          >
-            {% csrf_token %}
-            <input
-              class="form-control mr-sm-2"
-              name="search"
-              type="text"
-              placeholder="Search..."
-              aria-label="Search"
-            />
-            <button class="btn btn-nav my-2 my-sm-0" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-          </form>
 
+    <!-- Main Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light modern-navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand py-0" href="/">
+          <img
+            class="petgram-logo"
+            src="{% static 'images/nav-logo.png'%}"
+            alt="Petgram logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNavAltMarkup"
+        >
+          <div class="navbar-nav align-items-lg-center">
+            <a class="nav-item nav-link px-3" href="/">
+              <i class="fa fa-home mr-1" aria-hidden="true"></i> Home
+            </a>
+
+            {% if request.user.is_authenticated %}
+            <a
+              class="nav-item nav-link px-3"
+              href="/profile/{{request.user.id}}"
+            >
+              <i class="fa fa-user-o mr-1" aria-hidden="true"></i> Profile
+            </a>
+            <a class="nav-item nav-link px-3" href="/submit_post">
+              <i class="fa fa-plus-square-o mr-1" aria-hidden="true"></i> Post
+            </a>
+            <a
+              class="nav-item nav-link px-3 position-relative"
+              href="/notifications"
+            >
+              <i class="fa fa-bell-o mr-1" aria-hidden="true"></i> Notification
+              {% if total_notify and total_notify > 0 %}
+              <span class="badge badge-pill badge-danger notification-badge"
+                >{{total_notify}}</span
+              >
+              {% endif %}
+            </a>
+            <a class="nav-item nav-link px-3" href="/feed">
+              <i class="fa fa-compass mr-1" aria-hidden="true"></i> Explore
+            </a>
+            <a class="nav-item nav-link px-3 text-danger" href="/logout">
+              <i class="fa fa-sign-out mr-1" aria-hidden="true"></i> Logout
+            </a>
+            {% else %}
+            <a class="nav-item nav-link px-3" href="/login">
+              <i class="fa fa-sign-in mr-1" aria-hidden="true"></i> Login
+            </a>
+            {% endif %}
+
+            <!-- Modern Pill Search Bar -->
+            <form
+              class="form-inline ml-lg-3 mt-2 mt-lg-0 search-form-wrapper"
+              action="{% url 'search_bar' %}"
+              method="POST"
+            >
+              {% csrf_token %}
+              <div class="input-group modern-search-group">
+                <input
+                  class="form-control modern-search-input"
+                  name="search"
+                  type="text"
+                  placeholder="Search pets..."
+                  aria-label="Search"
+                />
+                <div class="input-group-append">
+                  <button class="btn modern-search-btn" type="submit">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </nav>

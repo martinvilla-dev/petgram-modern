@@ -6,7 +6,7 @@ from django.core.validators import FileExtensionValidator
 
 class Post(models.Model):
     display_name = models.ForeignKey(CustomUser, related_name='user', on_delete=models.CASCADE)
-    post_file= models.FileField(upload_to='post/', validators=[FileExtensionValidator(['jpg','jpeg','mp4', 'mov', 'png'])], null=True)
+    post_file= models.FileField(upload_to='post/', validators=[FileExtensionValidator(['jpg', 'jpeg', 'heic', 'HEIC', 'mp4', 'mov', 'png'])], null=True)
     caption = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
     likes = models.IntegerField(default=0)
@@ -16,6 +16,13 @@ class Post(models.Model):
     # NEW fields for geo-location and filters
     location = models.CharField(max_length=255, blank=True, null=True)
     filter_style = models.CharField(max_length=50, blank=True, null=True, default='normal')
+
+    @property
+    def is_video(self):
+        if self.post_file and self.post_file.url:
+            url_lower = self.post_file.url.lower()
+            return url_lower.endswith('.mp4') or url_lower.endswith('.mov')
+        return False
 
     def __str__(self):
         return f'{self.display_name} | {self.caption}'

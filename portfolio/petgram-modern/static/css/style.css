@@ -1,445 +1,457 @@
-/* 404 page styling image */
-/* h1 {
-    color: aqua;
-} */
+/* --- Modern Base & Typography --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 * {
     box-sizing: border-box;
 }
+
 body {
-    background-color: #FAF9F6;
+    background-color: #fafafa;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    color: #1a1a1a;
 }
-/* Navbar css */
-nav.navbar {
-    border-bottom: 2px solid #f4f4f4;
-}
+
+/* --- Modern Navbar Styling --- */
 .nav-accent {
-    background-color: #0066b3;
-    height: 50px;
+    background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    height: 44px;
 }
-.navbar.navbar-expand-lg.navbar-light.body-nav {
-    background-color: #fff;
-}
+
 .header-text {
-    font-family: 'Gochi Hand', cursive;
-    line-height: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 44px;
+    letter-spacing: 0.3px;
 }
-.btn-nav {
+
+nav.navbar {
+    border-bottom: 1px solid #eaeaea;
+    background-color: #fff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    padding: 0.75rem 1rem;
+}
+
+.body-nav {
+    margin-bottom: 35px;
+}
+
+.petgram-logo {
+    border-radius: 50%; 
+    width: 38px;
+    height: 38px;
     border: 2px solid #f58220;
+    object-fit: cover;
+}
+
+.navbar-nav a.nav-item.nav-link {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 500;
+    color: #4b5563 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navbar-nav a.nav-item.nav-link:hover {
+    color: #f58220 !important;
+    background-color: #fff7ed;
+}
+
+/* Modern Pill Search Bar */
+.form-inline .form-control {
+    background-color: #f3f4f6;
+    border: 1px solid transparent;
+    border-radius: 50rem;
+    padding: 0.4rem 1rem;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    background-color: #fff;
+    border-color: #f58220;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.15);
+}
+
+.btn-nav {
+    border: 1px solid #f58220;
     color: #f58220;
     background-color: #fff;
+    border-radius: 50rem;
+    padding: 0.35rem 0.85rem;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
+
 .btn-nav:hover {
     background-color: #f58220;
     color: #fff;
 }
-.form-control:focus {
-  border-color: #f58220;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(245, 130, 32, .075),0 0 8px rgb(245, 130, 32);
-  box-shadow: inset 0 1px 1px rgba(245, 130, 32,.075),0 0 8px rgb(245, 130, 32);
-}
-.navbar-nav a.nav-item.nav-link:hover {
-    color: #f58220;
-}
-.navbar-nav a.nav-item.nav-link {
-    font-family: 'Roboto', sans-serif;
-}
-.body-nav {
-    margin-bottom: 25px;
-}
 
-.petgram-logo{
-    border-radius: 50%; 
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f58220;
-}
-
-/* Homepage */
+/* --- Homepage & Post Cards --- */
 .avatar {
     vertical-align: middle;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    float:left;
+    float: left;
     border: 2px solid #f58220;
+    object-fit: cover;
 }
+
 .post-header {
-    /* float: right; */
-    margin-left: 20px;
-    line-height: 80px;
-    font-size: 20px;
+    margin-left: 15px;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 600;
 }
+
 .post-header > a {
-    color: #000;
+    color: #111827;
     text-decoration: none;
 }
+
 .post-header > a:hover {
     color: #f58220;
     text-decoration: none;
 }
+
+.card.post {
+    margin-bottom: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
 img.card-img-top {
     width: 100%;
+    max-height: 500px;
+    object-fit: cover;
 }
-.card.post {
-    margin-bottom: 50px;
-    font-family: 'Gochi Hand', cursive;
-    font-size: 20px;
-}
+
 .grid-container {
-    border: 1px solid #ccc;
+    border: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
 }
+
 .card-header.list {
     background-color: #f58220;
     color: #fff;
+    font-weight: 600;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
 }
+
 .card.side {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
+
 ul.list-group.list-group-flush {
-    color: #0066b3;
-}
-li.list-group-item > a {
-    color: #000;
-    text-decoration: none;
-}
-li.list-group-item > span > a {
-    color: rgb(133, 133, 133);
-    text-decoration: none;
-}
-li.list-group-item > span > a:hover {
     color: #f58220;
+}
+
+li.list-group-item {
+    border-color: #f3f4f6;
+}
+
+li.list-group-item > a {
+    color: #1f2937;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+li.list-group-item > span > a {
+    color: #6b7280;
     text-decoration: none;
 }
+
+li.list-group-item > span > a:hover,
 li.list-group-item > a:hover {
     color: #f58220;
     text-decoration: none;
 }
+
 .ellipsis {
     float: right;
-    line-height: 85px;
-    margin-right: 10px;
-    color: rgb(133, 133, 133);
-    font-family: 'Roboto', sans-serif;
+    line-height: 50px;
+    margin-right: 15px;
+    color: #6b7280;
 }
+
 .ellipsis > a {
-    color: #0066b3;
+    color: #4b5563;
 }
+
 .ellipsis > a:hover {
     color: #f58220;
 }
+
 .card-title.bubble > a {
-    color: #0066b3;
+    color: #f58220;
 }
-/* post details */
- .chat {
-    border: 1px solid #dedede;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 5px 0;
- }
- img.avatar-comments {
+
+/* --- Post Details & Comments --- */
+.chat {
+    border: 1px solid #eaeaea;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 0;
+}
+
+img.avatar-comments {
     float: left;
-    max-width: 60px;
+    max-width: 45px;
     width: 100%;
-    margin-right: 20px;
+    height: 45px;
+    margin-right: 15px;
     border-radius: 50%;
-    border: 2px solid #0066b3;
- }
-.btn.btn-comment {
     border: 2px solid #f58220;
-    color: #f58220;
-    background-color: #fff;
-    cursor: pointer;
-}
-.btn.btn-comment:hover {
-    background-color: #f58220;
-    color: #fff;
-}
-/* edit profile */
-.btn.profile-edit {
-    border: 2px solid #f58220;
-    color: #f58220;
-    background-color: #fff;
-    cursor: pointer;
-    width: 33%;
-    margin-left: 3px;
-}
-.btn.profile-edit:hover {
-    background-color: #f58220;
-    color: #fff;
-}
-.btn.edit-profile {
-    border: 2px solid #0066b3;
-    color: #0066b3;
-    background-color: #fff;
-    cursor: pointer;
-    width: 33%;
-}
-.btn.edit-profile:hover {
-    background-color: #0066b3;
-    color: #fff;
-}
-.btn.deactivate {
-    border: 2px solid #d10303;
-    color: #d10303;
-    background-color: #fff;
-    cursor: pointer;
-    width: 33%;
-    float: right;
-}
-.btn.deactivate:hover {
-    background-color: #d10303;
-    color: #fff;
-}
-img.card-img-top {
-    max-height: 500px;
     object-fit: cover;
 }
-h4.delete-header{
-    font-family: 'Gochi Hand', cursive;
-}
-.profile-card {
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 30px;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px rgba(94,104,121,.288);
-    border-radius: 5px;
-}
-/* Notification page */
-.card-header.notify-head, .card-header.upload-head {
-    font-family: 'Gochi Hand', cursive;
-    font-size: 20px;
-    background-color: #f58220;
-    color: #fff;
-    margin-bottom: 15px;
-}
-.notify-img {
-    vertical-align: middle;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    float:left; 
-}
-.notify-time {
-    line-height: 80px;
-    font-family: 'Roboto', sans-serif;
-}
-ul.notify-link > a {
-    margin-left: 10px;
-    text-decoration: none;
-    color: #0066b3;
-}
-ul.notify-link > a:hover {
-    color: #f58220;
-}
-.post-card {
-    font-family: 'Roboto', sans-serif;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px rgba(94,104,121,.288);
-    border-radius: 5px;
-}
-/* the profile and post forms */
-.form-control.post-form {
-    box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px rgba(94,104,121,.288);
-    border-radius: 5px;
-}
-.form-control.post-form:focus {
-    border-color: #f58220;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(245, 130, 32, .075),0 0 8px rgb(245, 130, 32);
-    box-shadow: inset 0 1px 1px rgba(245, 130, 32,.075),0 0 8px rgb(245, 130, 32);
-    font-family: 'Roboto', sans-serif;;
-}
-.container{
-    padding: 0px;
-     /*background-color: cadetblue;*/
-} 
-.profile-page-pic{
-    height: 200px;
-    display: block; 
-    margin-left: auto; 
-    margin-right: auto; 
-    margin-top: 2.5px; 
-    border-radius: 50%; 
-    width: 200px; 
-    border: 5px solid #F58220;
-    object-fit: cover;
-}
-.prophet{
-    float: left; 
-    border-radius: 50%; 
-    margin-top: 40px;
-    margin-left: 40px;
-    width: 210px;
-    height: 210px;
-    border: 3px solid #0066b3;
-}
-.user-info{
-    position: relative;
-    top: 40px;
-    padding-left: 295px;
-    height: 260px;
-    border-bottom: 1px solid rgb(207, 207, 207)
-}
-.username-title{
-    display: inline
-}
-.follow-unfollow{
-    display: inline;
-    position: relative;
-    left: 40px;
-    bottom: 8px
-}
-.profile-content{
-    margin-top: 40px;
-}
-.user-data-count{
-    margin-top: 1rem;
-}
-.profile-count{
-    display: inline;
-    padding-left: 40px;
-}
-.post-count{
-    display:inline;
-}
-.display-name{
-    font-weight: bold;
-}
-.profile-post-content{
-    object-fit: cover;
-    width: 300px; 
-    height: 300px; 
-    margin-top: 30px;
-    margin-left: 25px;
-}
-.profile-post-content:hover{
-    box-shadow: 0 5px 15px #0066b3
-}
-.fa-cog{
-    color: #F58220;
-    font-size: 30px;
-}
-.fa-cog:hover{
-    color: #0066b3
-}
-#user-website{
-    color: #F58220;
-}
-#user-website:hover{
-    color: #0066b3;
-}
-.col-sm{
-    flex-grow: 0;
-}
-.follow-btn{
-    background-color: #F58220;
-}
-.follow-btn:hover{
-    background-color: #0066b3;
-}
-#follower-list{
-    color: black
-}
-.follower-list:hover{
-    color: black
-}
-.feed-post-large{
-    object-fit: cover;
-    width: 630px; 
-    height: 630px; 
-    margin-top: 30px;
-}
-.feed-post-content{
-    margin-top: 40px;
-    display: flex;
-    flex-flow: column-wrap;
-}
-/* Search page */
-.card-header.search-head {
-    font-family: 'Gochi Hand', cursive;
-    font-size: 20px;
-    background-color: #f58220;
-    color: #fff;
-    margin-bottom: 15px;
-}
-.search-img {
-    vertical-align: middle;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    float:left;
-}
-.search-link > a{
-    margin-left: 10px;
-    text-decoration: none;
-    color: #0066b3;
-}
-.search-link > a:hover {
-   color: #f58220;
-}
-.search-info {
-    line-height: 80px;
-    font-family: 'Roboto', sans-serif;
-}
 
-.login-petgram-logo {
-    /* float: left;  */
-    border-radius: 50%; 
-    margin-left: 40px;
-    margin-bottom: 20px;
-    width: 210px;
-    height: 210px;
-    border: 3px solid #f58220;
-
-}
-/* followers and following list */
-img.following-avatar{
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-}
-
-.following-user{
-    line-height: 80px;
-}
-
+.btn.btn-comment,
+.btn.profile-edit,
+.btn.edit-profile,
 .btn.btn-following {
-    border: 2px solid #f58220;
+    border: 1px solid #f58220;
     color: #f58220;
     background-color: #fff;
+    border-radius: 50rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.btn.btn-comment:hover,
+.btn.profile-edit:hover,
+.btn.edit-profile:hover,
 .btn.btn-following:hover {
     background-color: #f58220;
     color: #fff;
 }
-.following-title {
-    font-family: 'Gochi Hand', cursive;
-}
-.explore-page-header{
-    text-align: center;
-    margin: auto;
-    color: #F58220;
-    font-family: 'Gochi Hand', cursive;
+
+.btn.deactivate {
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    background-color: #fff;
+    border-radius: 50rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    float: right;
+    transition: all 0.2s ease;
 }
 
-/* --- NEW: Photo Filter Styles --- */
-.filter-normal {
-    filter: none;
+.btn.deactivate:hover {
+    background-color: #ef4444;
+    color: #fff;
 }
-.filter-grayscale {
-    filter: grayscale(100%);
+
+h4.delete-header {
+    font-weight: 600;
 }
-.filter-sepia {
-    filter: sepia(100%);
+
+.profile-card, .post-card {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
 }
-.filter-vintage {
-    filter: sepia(50%) contrast(120%) brightness(90%) saturate(85%);
+
+/* --- Notification & Search Pages --- */
+.card-header.notify-head, 
+.card-header.upload-head, 
+.card-header.search-head {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #f58220;
+    color: #fff;
+    margin-bottom: 15px;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
 }
+
+.notify-img, .search-img {
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    float: left;
+    object-fit: cover;
+    border: 2px solid #f58220;
+}
+
+.notify-time, .search-info {
+    line-height: 60px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+ul.notify-link > a, .search-link > a {
+    margin-left: 12px;
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+ul.notify-link > a:hover, .search-link > a:hover {
+    color: #f58220;
+}
+
+/* --- Forms & Profile Page --- */
+.form-control.post-form {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.form-control.post-form:focus {
+    border-color: #f58220;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(245, 130, 32, 0.15);
+}
+
+.profile-page-pic {
+    height: 160px;
+    display: block; 
+    margin: 0 auto; 
+    border-radius: 50%; 
+    width: 160px; 
+    border: 4px solid #f58220;
+    object-fit: cover;
+}
+
+.prophet {
+    float: left; 
+    border-radius: 50%; 
+    margin-top: 30px;
+    margin-left: 30px;
+    width: 170px;
+    height: 170px;
+    border: 2px solid #eaeaea;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.user-info {
+    position: relative;
+    top: 30px;
+    padding-left: 240px;
+    height: 240px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.username-title {
+    display: inline;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.follow-unfollow {
+    display: inline;
+    position: relative;
+    left: 20px;
+    bottom: 4px;
+}
+
+.profile-content {
+    margin-top: 40px;
+}
+
+.user-data-count {
+    margin-top: 1rem;
+}
+
+.profile-count, .post-count {
+    display: inline;
+    margin-right: 25px;
+    font-size: 15px;
+}
+
+.display-name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.profile-post-content {
+    object-fit: cover;
+    width: 100%; 
+    height: 280px; 
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-post-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.fa-cog {
+    color: #4b5563;
+    font-size: 22px;
+    margin-left: 15px;
+    transition: color 0.2s;
+}
+
+.fa-cog:hover {
+    color: #f58220;
+}
+
+#user-website {
+    color: #f58220;
+    font-weight: 500;
+}
+
+#user-website:hover {
+    color: #111827;
+}
+
+.follow-btn {
+    background-color: #f58220;
+    border: none;
+    border-radius: 50rem;
+    padding: 0.35rem 1rem;
+    font-weight: 500;
+}
+
+.follow-btn:hover {
+    background-color: #d97016;
+}
+
+#follower-list {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.feed-post-large {
+    object-fit: cover;
+    width: 100%; 
+    height: 550px; 
+    border-radius: 8px;
+}
+
+.explore-page-header {
+    text-align: center;
+    margin: auto;
+    color: #111827;
+    font-weight: 700;
+}
+
+/* --- Photo Filters --- */
+.filter-normal { filter: none; }
+.filter-grayscale { filter: grayscale(100%); }
+.filter-sepia { filter: sepia(100%); }
+.filter-vintage { filter: sepia(50%) contrast(120%) brightness(90%) saturate(85%); }
