@@ -4,6 +4,7 @@ from post.forms import PostForm, CommentForm
 from user_profile.models import CustomUser
 from notification.models import Notification, NotifyComment
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
 from django.utils.text import slugify
 import re
@@ -56,6 +57,9 @@ def post_view(request):
                         reciever = user
                     )
             print(notifications)
+            
+            # Success flash message added here!
+            messages.success(request, 'Your post was created successfully!')
             return redirect(reverse('post_detail', args=[new_data.id]))
     else:
         form = PostForm()
@@ -140,7 +144,10 @@ def unlike_view(request, post_id):
 @login_required
 def delete_post_view(request, post_id):
     current_post = Post.objects.get(id=post_id)
-    current_post.delete()
+    if current_post.display_name == request.user:
+        current_post.delete()
+        # Warning flash message added here!
+        messages.warning(request, 'Your post has been deleted.')
     return HttpResponseRedirect('/')
 
 @login_required
@@ -150,52 +157,11 @@ def editPost_view(request, post_id=id):
     total_notify = notify + cnotify
     edit = Post.objects.get(id=post_id)
     if request.method == 'POST':
-        form =PostForm(request.POST, instance=edit)
-        form.save()
-        return HttpResponseRedirect(f'/post_detail/{post_id}')
+        form = PostForm(request.POST, instance=edit)
+        if form.is_valid():
+            form.save()
+            # Success flash message added here!
+            messages.success(request, 'Your post has been updated!')
+            return HttpResponseRedirect(f'/post_detail/{post_id}')
     form = PostForm(instance=edit)
     return render(request, 'upload_form.html', {'total_notify': total_notify, 'form': form})
-
-@login_required
-def post_view(request):
-    notify = Notification.objects.filter(reciever=request.user, read=False).count()
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        
-        # --- PASTE THE DEBUG LINES HERE ---
-        print("Form is valid?", form.is_valid())
-        if not form.is_valid():
-            print("Form errors:", form.errors)
-        # ----------------------------------
-
-        if form.is_valid():
-            new_data = Post.objects.create(
-                display_name = request.user,
-                caption = form.cleaned_data['caption'],
-                post_file = form.cleaned_data['post_file'],
-            )
-
-            hashtags = re.findall(r'#(\S+)', form.cleaned_data['caption'])
-            for item in hashtags:
-                tag = slugify(item[0:50])
-                new_tag = Hashtags.objects.get_or_create(
-                    slug = tag
-                )[0]
-                new_tag.post.add(new_data)
-                new_tag.save()
-                print(new_tag)
-        
-            notifications = re.findall(r'@(\S+)', form.cleaned_data['caption'])
-            for string in notifications:
-                user = CustomUser.objects.filter(username=string).first()
-                if user:
-                    Notification.objects.create(
-                        read = False,
-                        text = new_data,
-                        reciever = user
-                    )
-            print(notifications)
-            return redirect(reverse('post_detail', args=[new_data.id]))
-    else:
-        form = PostForm()
-    return render(request, 'upload_form.html', {'form': form, 'notify': notify})

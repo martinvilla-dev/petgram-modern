@@ -50,7 +50,7 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 auth_handler404 = 'authentication.views.error_404_view'
 notify_handler404 = 'notification.views.error_404_view'
